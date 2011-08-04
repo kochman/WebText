@@ -8,6 +8,7 @@ WebText was created by [Sidney Kochman](http://kochman.org/).
 
 ## Install
 
+* Grab the source from [GitHub](http://github.com/kochman/WebText).
 * Copy all of the files to a web server running PHP. Make sure you grab the .htaccess file, too.
 * Edit the site title in '_app/config.php'.
 * Customize the template in '_app/template'.
