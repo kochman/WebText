@@ -45,7 +45,7 @@ if(file_exists('.htaccess')) {
 		$title = "Home";
 	} else {
 		header('HTTP/1.0 404 Not Found');
-		$content = "404 Not Found";
+		$content = $error404;
 		$content = Markdown($content);
 		$navigation = navigation("");
 	}
