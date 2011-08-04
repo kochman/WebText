@@ -18,8 +18,8 @@ function navigation($currentPage) {
     	foreach($liPages as $liPage) {
     		$liClass = "";
     		if($liPage == $currentPage) $liClass = "active";
-    		if($liPage == "home") $list .= '<li class="' . $liClass . '"><a href="/">' . ucwords($liPage) . '</a></li>';
-    		else $list .= '<li class="' . $liClass . '"><a href="/' . $liPage . '">' . ucwords($liPage) . '</a></li>';
+    		if($liPage == "home") $list .= '<li class="' . $liClass . '"><a href="./">' . ucwords($liPage) . '</a></li>';
+    		else $list .= '<li class="' . $liClass . '"><a href="' . $liPage . '">' . ucwords($liPage) . '</a></li>';
     	}
 		$list .= '</ul>';
 		
