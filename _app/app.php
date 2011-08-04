@@ -27,26 +27,31 @@ function navigation($currentPage) {
 	}
 }
 
-if(file_exists('content/' . $page . '.txt')) {
-	$content = file_get_contents('content/' . $page . '.txt');
-    $content = Markdown($content);
-	$navigation = navigation($page);
-	$title = ucwords($page);
-} elseif(file_exists('content/home.txt') && !$page) {
-	$content = file_get_contents('content/home.txt');
-    $content = Markdown($content);
-    $navigation = navigation("home");
-    $title = "Home";
-} elseif(!file_exists('content/home.txt') && !$page) {
-	$content = "Customize this page by creating a 'home.txt' file in the 'content' directory.";
-    $content = Markdown($content);
-    $navigation = navigation("home");
-    $title = "Home";
+if(file_exists('.htaccess')) {
+	if(file_exists('content/' . $page . '.txt')) {
+		$content = file_get_contents('content/' . $page . '.txt');
+		$content = Markdown($content);
+		$navigation = navigation($page);
+		$title = ucwords($page);
+	} elseif(file_exists('content/home.txt') && !$page) {
+		$content = file_get_contents('content/home.txt');
+		$content = Markdown($content);
+		$navigation = navigation("home");
+		$title = "Home";
+	} elseif(!file_exists('content/home.txt') && !$page) {
+		$content = "Customize this page by creating a 'home.txt' file in the 'content' directory.";
+		$content = Markdown($content);
+		$navigation = navigation("home");
+		$title = "Home";
+	} else {
+		header('HTTP/1.0 404 Not Found');
+		$content = "404 Not Found";
+		$content = Markdown($content);
+		$navigation = navigation("");
+	}
 } else {
-	header('HTTP/1.0 404 Not Found');
-	$content = "404 Not Found";
-    $content = Markdown($content);
-    $navigation = navigation("");
+	$content = "There isn't a .htaccess file. WebText requires this file to operate properly.";
+	$content = Markdown($content);
 }
 
 include_once("template/index.php");
