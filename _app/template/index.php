@@ -10,7 +10,7 @@
 <div class="container">
 	
 	<div class="header">
-		<h1><a href="/"><?php echo $siteTitle; ?></a></h1>
+		<h1><a href="./"><?php echo $siteTitle; ?></a></h1>
 	</div>
 	
 	<div class="navigation">
