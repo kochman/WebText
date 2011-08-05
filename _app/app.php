@@ -22,7 +22,7 @@ function navigation($currentPage) {
 	foreach($liPages as $liPage) {
 		$liClass = "";
 		if($liPage == $currentPage) $liClass = "active";
-		$list .= '<li class="' . $liClass . '"><a href="' . $liPage . '">' . ucwords($liPage) . '</a></li>';
+		if($liPage != "") $list .= '<li class="' . $liClass . '"><a href="' . $liPage . '">' . ucwords($liPage) . '</a></li>';
 	}
 	$list .= '</ul>';
 	
