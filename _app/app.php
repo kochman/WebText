@@ -4,27 +4,29 @@ include_once("includes/markdown.php");
 include_once("config.php");
 
 function navigation($currentPage) {
-	if ($handle = opendir('content')) {
-		$liPages = array("home");
-		while (false !== ($file = readdir($handle))) {
-			if($file == "home.txt");
-			elseif($file == ".");
-			elseif($file == "..");
-			else $liPages[] = rtrim(rtrim($file, "txt"), "."); // Weird nesting thing
-		}
-		closedir($handle);
-		
-		$list = '<ul>';
-    	foreach($liPages as $liPage) {
-    		$liClass = "";
-    		if($liPage == $currentPage) $liClass = "active";
-    		if($liPage == "home") $list .= '<li class="' . $liClass . '"><a href="./">' . ucwords($liPage) . '</a></li>';
-    		else $list .= '<li class="' . $liClass . '"><a href="' . $liPage . '">' . ucwords($liPage) . '</a></li>';
-    	}
-		$list .= '</ul>';
-		
-		return $list;
+
+	$dir    = 'content';
+	$liPages = scandir($dir);
+
+	foreach($liPages as $key => $liPage) {
+		$liPage = rtrim($liPage, ".txt");
+		$liPages[$key] = $liPage;
+		if($liPage == "home") unset($liPages[$key]);
+		elseif($liPage == ".") unset($liPages[$key]);
+		elseif($liPage == "..") unset($liPages[$key]);
 	}
+		
+	$list = '<ul>';
+	if($currentPage == "home") $liClass = "active";
+	$list .= '<li class="' . $liClass . '"><a href="./">Home</a></li>';
+	foreach($liPages as $liPage) {
+		$liClass = "";
+		if($liPage == $currentPage) $liClass = "active";
+		$list .= '<li class="' . $liClass . '"><a href="' . $liPage . '">' . ucwords($liPage) . '</a></li>';
+	}
+	$list .= '</ul>';
+	
+	return $list;
 }
 
 if(file_exists('.htaccess')) {
