@@ -9,7 +9,7 @@ function navigation($currentPage) {
 	$liPages = scandir($dir);
 
 	foreach($liPages as $key => $liPage) {
-		$liPage = rtrim($liPage, ".txt");
+		$liPage = rtrim(rtrim($liPage, "txt"), "."); // yay
 		$liPages[$key] = $liPage;
 		if($liPage == "home") unset($liPages[$key]);
 		elseif($liPage == ".") unset($liPages[$key]);
